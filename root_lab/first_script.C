@@ -17,15 +17,18 @@ void CrossSection::nuCrossSection(TString file, TString name)
 {
     gStyle -> SetOptFit(1); 
     Int_t verbose = 0;
+
     TTree *t1 = new TTree("TTree test cross_section", "TTre test");
+
     t1 -> ReadFile(file, "tt1:tt2:cs");
 
     Float_t tt1, tt2, cs;
     t1 -> SetBranchAddress("tt1", &tt1);
     t1 -> SetBranchAddress("tt2", &tt2);
     t1 -> SetBranchAddress("cs", &cs);
-
+//============================================================
     Float_t x[200], y[200];
+    Float_t xe[200], ye[200];
     Float_t g = 0;    
 
     Int_t nentries = t1 -> GetEntries();
@@ -36,17 +39,21 @@ void CrossSection::nuCrossSection(TString file, TString name)
         
         x[i] = (tt1+tt2)/2;
         y[i] = cs;
+        xe[i] = 0;
+        ye[i] = TMath::Sqrt(cs);
     }
-
+//=============================================================
     TCanvas *c1 = new TCanvas("c1", "Test", 0, 0, 800, 600);
     //gPad -> SetLogx();
     
     c1 ->cd(1);
-    TGraph *nuCS = new TGraph(nentries, x, y);
+    TGraphErrors *nuCS = new TGraphErrors(nentries, x, y,xe,ye);
     nuCS -> Draw("AP");
     nuCS -> GetXaxis() -> SetTitle("t [ns]");
     nuCS -> GetYaxis() -> SetTitle("N");
-    nuCS->Fit("pol2");
+    nuCS -> Fit("pol2");
+    nuCS -> SetMarkerStyle(20);
+    nuCS -> SetMarkerSize(0.8);
     //nuCS -> GetXaxis() -> SetLimits(0.1, 500);
     
     Float_t intCS = nuCS -> Integral();
