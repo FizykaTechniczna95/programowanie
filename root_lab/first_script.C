@@ -15,6 +15,7 @@ class CrossSection : public TObject
 
 void CrossSection::nuCrossSection(TString file, TString name)
 {
+    gStyle -> SetOptFit(1); 
     Int_t verbose = 0;
     TTree *t1 = new TTree("TTree test cross_section", "TTre test");
     t1 -> ReadFile(file, "tt1:tt2:cs");
