@@ -1,0 +1,62 @@
+program emerytura
+
+integer :: years, monthSave, months, i, n
+real :: suma, rawsum, percent
+real,  dimension(30) :: interest
+real :: proc 
+
+months=12
+years=30
+proc=0.018
+suma=1000.
+monthSave=100
+percent=0.
+rawsum=suma
+
+open(unit=1,file='proc.txt')
+
+do i=1, 30
+read(1,*) interest(i)
+end do
+
+print *,interest
+
+close(1)
+do i=1, months*years
+
+n=(months*years)/12
+
+
+        !if(n/=0) then 
+        
+        !read(1,*) interest
+        
+        !proc=interest
+    
+        !end if
+                
+        suma=suma+monthSave
+
+        rawsum=rawsum+monthSave
+
+        percent=suma*(proc/months)
+
+        suma=suma+percent
+
+end do
+
+!close(1)
+
+print *,'#lat oszczendzania: ', years
+ 
+print *,'miesiecznie odkladane ', monthSave
+
+print *,'oprocentowanie ', proc*100., '%'
+
+print *, 'uzbierana suma', suma
+
+print *, 'zysk ', suma-rawsum
+
+print *,'+1000 zl do pensji : ', (suma/1000)/months
+
+end program emerytura
