@@ -51,7 +51,7 @@ void CrossSection::nuCrossSection(TString file, TString name)
     nuCS -> Draw("AP");
     nuCS -> GetXaxis() -> SetTitle("t [ns]");
     nuCS -> GetYaxis() -> SetTitle("N");
-    nuCS -> Fit("pol2");
+    nuCS -> Fit("expo");
     nuCS -> SetMarkerStyle(20);
     nuCS -> SetMarkerSize(0.8);
     //nuCS -> GetXaxis() -> SetLimits(0.1, 500);
