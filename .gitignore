@@ -1,1 +1,7 @@
 *.swp
+*.lof
+*.log
+*.lol
+*.out
+*.gz
+*.toc

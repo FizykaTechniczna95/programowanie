@@ -1,0 +1,115 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{graphicx}
+\usepackage{abstract}
+\usepackage{wrapfig}
+\usepackage{mathrsfs,amsmath} 
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{cleveref}
+\usepackage{siunitx}
+
+\setlength{\headheight}{12pt} 
+\setlength{\textheight}{25cm}
+\setlength{\textwidth}{17cm}
+\setlength{\footskip}{10mm}
+\setlength{\oddsidemargin}{0mm}
+\setlength{\evensidemargin}{0mm}
+\setlength{\topmargin}{0mm}
+\setlength{\headsep}{10mm}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstset{style=mystyle}
+
+\selectlanguage{polish}
+
+\newgeometry{rmargin=2.5cm,lmargin=2.5cm,bmargin=2.5cm}
+\pagestyle{fancy}
+\rhead{Zagadnienia}
+\chead{}
+\lhead{}
+\lfoot{}
+\cfoot{\thepage  }
+\rfoot{}
+
+\begin{document}
+
+\thispagestyle{empty}
+\begin{center}
+{\Large \textbf{Egzamin Fortran}}
+\end{center}
+\newpage
+\tableofcontents
+\newpage
+\section{Opracowanie zagadnień}
+
+\input{sections/1}
+\input{sections/2}
+\input{sections/3}
+\input{sections/4}
+\input{sections/5}
+\input{sections/6}
+\input{sections/7}
+\input{sections/8}
+\input{sections/9}
+\input{sections/10}
+\input{sections/11}
+\input{sections/12}
+\input{sections/13}
+\input{sections/14}
+\input{sections/15}
+\input{sections/16}
+\input{sections/17}
+\input{sections/18}
+\input{sections/19}
+\input{sections/20}
+\input{sections/21}
+\input{sections/22}
+\input{sections/23}
+\input{sections/24}
+\input{sections/25}
+\input{sections/26}
+\input{sections/27}
+\input{sections/28}
+\input{sections/29}
+\input{sections/30}
+
+\newpage
+\listoffigures
+\renewcommand{\lstlistingname}{Kod źródłowy}
+\renewcommand{\lstlistlistingname}{\lstlistingname}
+\lstlistoflistings
+
+\end{document}
