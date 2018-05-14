@@ -1,0 +1,203 @@
+void c1()
+{
+//=========Macro generated from canvas: c1/#nu_{#mu,e}
+//=========  (Tue Apr 24 11:47:00 2018) by ROOT version 6.12/06
+   TCanvas *c1 = new TCanvas("c1", "#nu_{#mu,e}",65,52,800,602);
+   c1->Range(-1007.584,-5.250001,84.66739,98.25);
+   c1->SetFillColor(0);
+   c1->SetBorderMode(0);
+   c1->SetBorderSize(2);
+   c1->SetFrameBorderMode(0);
+   c1->SetFrameBorderMode(0);
+   
+   Double_t nuCS_fx1[71] = {
+   -825.542,
+   -815.14,
+   -804.7375,
+   -795.4298,
+   -783.933,
+   -773.5305,
+   -763.128,
+   -752.7255,
+   -742.323,
+   -731.921,
+   -721.5185,
+   -711.116,
+   -700.7135,
+   -690.311,
+   -679.909,
+   -669.5065,
+   -659.104,
+   -648.7015,
+   -638.299,
+   -627.897,
+   -617.4945,
+   -607.092,
+   -596.6895,
+   -586.287,
+   -575.885,
+   -565.4825,
+   -555.08,
+   -544.6775,
+   -534.275,
+   -523.873,
+   -513.4705,
+   -503.068,
+   -492.6655,
+   -482.263,
+   -471.861,
+   -461.4585,
+   -451.056,
+   -440.6535,
+   -430.251,
+   -419.849,
+   -409.4465,
+   -399.044,
+   -388.6415,
+   -378.239,
+   -367.837,
+   -357.4345,
+   -347.032,
+   -336.6295,
+   -326.227,
+   -315.825,
+   -305.4225,
+   -295.02,
+   -284.618,
+   -274.2155,
+   -263.813,
+   -253.4105,
+   -243.008,
+   -232.606,
+   -222.2035,
+   -211.801,
+   -201.3985,
+   -190.996,
+   -180.594,
+   -170.1915,
+   -159.789,
+   -149.3865,
+   -138.984,
+   -128.582,
+   -118.1795,
+   -107.777,
+   -97.3745};
+   Double_t nuCS_fy1[71] = {
+   81,
+   73,
+   68,
+   68.08508,
+   57,
+   63,
+   49,
+   56,
+   68,
+   67,
+   58,
+   63,
+   36,
+   68,
+   63,
+   57,
+   47,
+   54,
+   44,
+   47,
+   61,
+   55,
+   57,
+   41,
+   54,
+   38,
+   32,
+   32,
+   35,
+   34,
+   39,
+   36,
+   25,
+   34,
+   38,
+   24,
+   37,
+   41,
+   43,
+   54,
+   49,
+   44,
+   53,
+   54,
+   45,
+   51,
+   48,
+   53,
+   49,
+   46,
+   45,
+   27,
+   30,
+   25,
+   22,
+   39,
+   33,
+   20,
+   33,
+   31,
+   33,
+   47,
+   43,
+   47,
+   29,
+   21,
+   29,
+   23,
+   12,
+   12,
+   20};
+   TGraph *graph = new TGraph(71,nuCS_fx1,nuCS_fy1);
+   graph->SetName("nuCS");
+   graph->SetTitle("CS");
+   graph->SetFillStyle(1000);
+   graph->SetMarkerStyle(20);
+   
+   TH1F *Graph_Graph1 = new TH1F("Graph_Graph1","CS",100,-898.3587,-24.55775);
+   Graph_Graph1->SetMinimum(5.1);
+   Graph_Graph1->SetMaximum(87.9);
+   Graph_Graph1->SetDirectory(0);
+   Graph_Graph1->SetStats(0);
+
+   Int_t ci;      // for color index setting
+   TColor *color; // for color definition with alpha
+   ci = TColor::GetColor("#000099");
+   Graph_Graph1->SetLineColor(ci);
+   Graph_Graph1->GetXaxis()->SetTitle("E");
+   Graph_Graph1->GetXaxis()->SetLabelFont(42);
+   Graph_Graph1->GetXaxis()->SetLabelSize(0.035);
+   Graph_Graph1->GetXaxis()->SetTitleSize(0.035);
+   Graph_Graph1->GetXaxis()->SetTitleFont(42);
+   Graph_Graph1->GetYaxis()->SetTitle("CS");
+   Graph_Graph1->GetYaxis()->SetLabelFont(42);
+   Graph_Graph1->GetYaxis()->SetLabelSize(0.035);
+   Graph_Graph1->GetYaxis()->SetTitleSize(0.035);
+   Graph_Graph1->GetYaxis()->SetTitleOffset(0);
+   Graph_Graph1->GetYaxis()->SetTitleFont(42);
+   Graph_Graph1->GetZaxis()->SetLabelFont(42);
+   Graph_Graph1->GetZaxis()->SetLabelSize(0.035);
+   Graph_Graph1->GetZaxis()->SetTitleSize(0.035);
+   Graph_Graph1->GetZaxis()->SetTitleFont(42);
+   graph->SetHistogram(Graph_Graph1);
+   
+   graph->Draw("AP");
+   
+   TPaveText *pt = new TPaveText(0.4649373,0.94,0.5350627,0.995,"blNDC");
+   pt->SetName("title");
+   pt->SetBorderSize(0);
+   pt->SetFillColor(0);
+   pt->SetFillStyle(0);
+   pt->SetTextFont(42);
+   TText *pt_LaTex = pt->AddText("CS");
+   pt->Draw();
+   c1->Modified();
+   c1->cd();
+   c1->SetSelected(c1);
+}
