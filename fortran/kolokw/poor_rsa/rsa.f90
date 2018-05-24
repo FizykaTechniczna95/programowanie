@@ -1,85 +1,99 @@
 program rsa
-implicit none
-integer :: a,b,c,d,e,f
-integer, dimension(2) :: pubkey, privkey
-integer :: prime_generator, modinv
-call generate_keys(a,b,c)
-pubkey(1) = a
-pubkey(2) = c
-privkey(1) = b
-privkey(2) = c
-call encrypt(12, pubkey, f)
-call encrypt(f, privkey, e)
-print*, "e", pubkey(2)
-print*, "pub", pubkey(1)
-print*,"priv", privkey(1)
-print*,"crypto", f
-print*,"msg", e
+        implicit none
+        integer :: prime_generator
+        integer, dimension(2) :: pub, priv
+        integer :: msg, crypto, decr, x,y
+        call generate_keys(pub, priv)
+        
+        read(*,*) msg
+
+        call encrypt(msg, pub, crypto)
+        
+        call decrypt(crypto, priv, decr)
+        print *, "msg: ", msg
+        print *, "encrypted using pub.key: ", crypto
+        print *, "decrypted using priv.key ", decr
 end program
 
-function prime_generator(min)
-integer :: i, min, nm,  tmp=3 
-integer :: prime_generator
-nm = min
-do while (tmp>2)
-        tmp = 0
-        do i=1,nm,1
-                if ( modulo(nm, i) == 0 ) then
-                        tmp = tmp + 1
-                end if
+
+function prime_generator(num)
+        integer :: prime_generator
+        integer :: num
+        integer :: i, tmp=3,num2,c
+        num2 =num
+        do while (tmp>2)
+                num2 = num2+1
+                tmp = 0
+                do i=1, num2, 1
+                        if (modulo(num2, i) == 0) then
+                                tmp = tmp + 1
+                        end if
+                end do
         end do
-        nm = nm + 1
-end do
-prime_generator = min + 1
+        prime_generator = num2 
 end function
 
-function modinv(a, b)
-integer :: modinv
-integer :: a, b
-integer :: x, y, rr, xx
-integer :: r=1,s=0
-x = a
-y = b
-do while (y/=0)
-        rr = r
-        r = s
-        s = rr - x/y * s
-        xx = x
-        x = y
-        y = modulo(xx,y)
-end do
-modinv = r
+function modinv(e,phi)
+        integer :: modinv
+        integer :: e, phi
+        integer :: r=1, s=0
+        integer :: x,y,tr,tx
+        x = e
+        y = phi
+        do while ( y/=0 )
+                tr = r
+                r = s
+                s = tr - x/y*s
+                tx = x
+                x = y
+                y = modulo(tx, y)
+        end do
+        modinv = r
 end function
 
-subroutine generate_keys(pub, priv, rprime)
-integer, intent(out) :: pub, priv, rprime
-integer :: prime_generator, modinv
-integer :: p, q, n, phi, e, d
+subroutine generate_keys(pub, priv)
+        integer :: prime_generator
+        integer, dimension(2) :: pub, priv
+        integer :: p, q, n, e, phi, d
+        p = 61
+        q = 53
+        n = p*q
+        phi = n - p - q +1
+        e = 17
+        d = modulo(modinv(e,phi), phi)
 
-p = prime_generator(123456)
-q = prime_generator(4567)
-n = p*q
-phi = n-p-q+1
-e = 65537
-d = modulo(modinv(e,phi), phi)
-!print*, e
-pub = e
-priv = d
-rprime = n
+        pub(1) = e
+        pub(2) = n
+
+        priv(1) = d
+        priv(2) = n
 end subroutine
 
-subroutine encrypt(msg, key, crypto)
-integer, intent(in) :: msg
-integer, dimension(2), intent(in) :: key
-integer, intent(out) :: crypto
-print*,"Encrypting..."
-crypto = modulo(msg**key(1),key(2))
+subroutine encrypt(msg, pub, crypto)
+        integer, dimension(2) :: pub
+        integer :: msg
+        integer :: crypto
+        open(1, file="key.pub", status="replace")
+        write(1,*) msg, pub(1), pub(2)
+        close(1)
+        call execute_command_line("python3 mm.py key.pub")
+        open(2, file="msg.txt", status="old" )
+        read(2,*) crypto
+        close(2)
 end subroutine
 
-subroutine decrypt(msg, key, crypto)
-integer, intent(out) :: msg
-integer, dimension(2), intent(in) :: key
-integer, intent(in) :: crypto
-print*,"Decrypting..."
-msg = modulo(crypto**key(1),key(2))
+subroutine decrypt(crypto, priv, decr)
+        integer, dimension(2) :: priv
+        integer :: crypto
+        integer :: decr
+
+        print *, "XXX: ", modulo(crypto**priv(1),priv(2))
+        open(1, file="key.priv", status="replace")
+        write(1,*) crypto, priv(1), priv(2)
+        close(1)
+        call execute_command_line("python3 mm.py key.priv") 
+        !(msg^e % n) w pythonie poniewaz fortran zwracał inf dla msg^e mimo kind=16
+        open(2, file="msg.txt", status="old" )
+        read(2,*) decr
+        close(2)
 end subroutine
