@@ -1,0 +1,16 @@
+\subsection{Jaki jest cel stosowania segmentu BLOCK DATA}
+-Poprzez segment block data mogą być wprowadzane dane do programu.
+\\
+\\
+-segment ten służy do nadawania wartości początkowych zmiennym umieszczonym w obszarach wspólnych.
+\\
+\\
+struktura: 
+\\
+BLOCK DATA nazwa
+\\
+common /nazwa obszaru/ X,Y,I(10)
+\\
+data x,y,I /0.0,5.92,4*3,6*0/
+\\
+end
