@@ -1,0 +1,31 @@
+\subsection{Podaj postać arytmetycznej instrukcji warunkowej}
+IF(wyrażenie arytmetyczne) etyk1, etyk2, etyk3
+\\
+\\
+Przekierowanie obliczeń do instrukcji oznaczonej odpowiednią etykietą następuje, gdy:
+\\
+wyrażenie arytmetyczne<0 -> etyk1
+\\
+wyrażenie arytmetyczne=0 -> etyk2
+\\
+wyrażenie arytmetyczne>0 -> etyk3
+\\
+\\
+przykład:
+\\
+\\
+if(delta) 10,20,30
+\\
+10 print *,'brak rozwiazań'
+\\
+	go to 100
+\\
+20 print*,'jedno rozwiązanie'
+\\
+	go to 100
+\\
+30 print *,'dwa rozwiązania'
+\\
+	go to 100
+\\
+100 continue
